@@ -133,7 +133,8 @@
         </div>
         <div class="checkout-info">
           <label>Chave Pix:</label>
-          <input id="pix-key" type="text" value="" readonly style="text-align:center; font-weight:bold;">
+          <input id="pix-key" type="text" value="" readonly style="text-align:center; font-weight:bold; cursor:pointer;" onclick="copyPixKey()" title="Clique para copiar">
+          <span id="copy-feedback" style="display:none; color:#28a745; font-size:0.95em; margin-top:4px; text-align:center;">Pix copiado!</span>
         </div>
         <p style="text-align:center; color:#222;">Após o pagamento, envie o comprovante para nosso WhatsApp!</p>
         <button class="finalizar-btn" onclick="closePix()">Fechar</button>
@@ -141,6 +142,16 @@
     </div>
 
     <script>
+      function copyPixKey() {
+        const pixInput = document.getElementById('pix-key');
+        pixInput.select();
+        pixInput.setSelectionRange(0, 99999); // Para mobile
+        document.execCommand('copy');
+        // Feedback visual
+        const feedback = document.getElementById('copy-feedback');
+        feedback.style.display = 'inline';
+        setTimeout(() => { feedback.style.display = 'none'; }, 1200);
+      }
       // Mapeamento dos produtos para QR Codes e chaves Pix
       const pixData = {
         'COWBOY + FRITAS': {
@@ -193,4 +204,3 @@
   </footer>
 </body>
 </html>
-
